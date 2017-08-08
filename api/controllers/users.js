@@ -20,20 +20,20 @@ export const userIndex = (req, res, next) => (
 // )
 
 export const register = (req, res, next) => {
-  User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
+  User.register(new User({
+    username: req.body.username,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+  }), req.body.password, (err, user) => {
     if (err) {
       return res.status(401).json({ error: 'Email address in use' });
     }
-    else {
-      return res
-        .status(200)
-        .json(getToken());
-    }
-  }
-);
+    return res
+      .status(200)
+      .json(getToken(user));
+  });
 };
 
-//
 // export const login = (req, res, next) => {
 //   passport.authenticate('local', (err, user, info) => {
 //     if (err) {
@@ -62,16 +62,12 @@ export const login = (req, res, next) => {
     if (user) {
       return res
         .status(200)
-<<<<<<< HEAD
         .json(JSON.parse(getToken(user)));
-=======
-        .json(getToken());
->>>>>>> parent of 41e2e5b... Passing user into getToken function
     }
   })(req, res, next);
 };
 
-export const getToken = (err, user, info) => {
+export const getToken = (user) => {
     const token = jwt.sign({ id: user._id, username: user.username }, secret);
     return {token};
 };
