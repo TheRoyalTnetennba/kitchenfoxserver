@@ -27,7 +27,7 @@ export const register = (req, res, next) => {
     else {
       return res
         .status(200)
-        .json(getToken());
+        .json(getToken(user));
     }
   }
 );
@@ -62,12 +62,12 @@ export const login = (req, res, next) => {
     if (user) {
       return res
         .status(200)
-        .json(getToken());
+        .json(getToken(user));
     }
   })(req, res, next);
 };
 
-export const getToken = (err, user, info) => {
+export const getToken = (user) => {
     const token = jwt.sign({ id: user._id, username: user.username }, secret);
     return {token};
 };
