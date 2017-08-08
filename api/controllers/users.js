@@ -27,7 +27,7 @@ export const register = (req, res, next) => {
     else {
       return res
         .status(200)
-        .json(getToken(user));
+        .json(getToken());
     }
   }
 );
@@ -62,12 +62,16 @@ export const login = (req, res, next) => {
     if (user) {
       return res
         .status(200)
+<<<<<<< HEAD
         .json(JSON.parse(getToken(user)));
+=======
+        .json(getToken());
+>>>>>>> parent of 41e2e5b... Passing user into getToken function
     }
   })(req, res, next);
 };
 
-export const getToken = (user) => {
+export const getToken = (err, user, info) => {
     const token = jwt.sign({ id: user._id, username: user.username }, secret);
     return {token};
 };
