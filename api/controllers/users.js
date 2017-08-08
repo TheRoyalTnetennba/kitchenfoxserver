@@ -62,7 +62,7 @@ export const login = (req, res, next) => {
     if (user) {
       return res
         .status(200)
-        .json(JSON.parse(getToken(user)));
+        .json(getToken(user));
     }
   })(req, res, next);
 };
