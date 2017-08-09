@@ -1,29 +1,19 @@
-import User from '../models/user';
-import passport from 'passport';
-import jwt from 'jsonwebtoken';
-// import { findfunky } from './users';
+// import User from '../models/user';
+// import populate from '../db/populateUser'
 
-const testItems = (user) => {
-  console.log(user);
-  user.update({
-    inventory: 'oijoij',
-  })
-}
+import { getUserFromToken, updateItems, getIdFromToken } from '../db/queries';
 
+export const itemsIndex = (req, res) => (
+  getUserFromToken(req.headers.authorization)
+    .then(user => res.status(200).json(user.inventory))
+    .error(error => res.send(error))
+);
 
-export const itemsIndex = (req, res, next) => {
-  passport.authenticate('jwt', (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.status(401).json(String(err));
-    }
-    if (user) {
-      testItems(user);
-      return res
-        .status(200)
-        .json({ secret: '123' });
-    }
-  })(req, res, next);
+// TODO: Something isn't returning... TMA (too much asynchronous)
+export const itemsPatch = (req, res) => {
+  const id = getIdFromToken(req.headers.authorization);
+  updateItems(id, req.body.inventory)
+    .then(inventory => (
+      res.json(inventory)
+    ));
 };
