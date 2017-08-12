@@ -1,7 +1,6 @@
 import passport from 'passport';
 // import User from '../models/user';
-// import populate from '../db/populateUser';
-import { removeZeroQuanityItems } from '../db/queries';
+import populate from '../db/populateUser';
 
 import { updateItems } from '../db/queries';
 
@@ -25,6 +24,7 @@ export const itemsPatch = (req, res) => {
   })(req, res);
 };
 
-export const test = (req, res) => (
-  removeZeroQuanityItems().then(response => res.json(response))
-);
+export const populateDb = (req, res, next) => {
+  populate();
+  
+};
