@@ -50,6 +50,13 @@ const populate = () => {
       last_name: 'Yang',
       inventory,
     },
+    {
+      username: 'Fox',
+      password: 'foxfox',
+      first_name: 'Cooking',
+      last_name: 'Fox',
+      inventory,
+    },
   ];
 
   const addSeed = () => (users.map(user => User.register(new User({
