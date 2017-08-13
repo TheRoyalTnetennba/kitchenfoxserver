@@ -72,13 +72,21 @@ router.get('/recipes', (req, res, next) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     if (user) {
-      getItemsByUserId(user._id).then((result) => {
-        apiCall(req.headers.number, createQuery(result)).then((recipeinfo) => {
+      if (req.headers.query === undefined) {
+        getItemsByUserId(user._id).then((result) => {
+          apiCall(req.headers.number, createQuery(result)).then((recipeinfo) => {
+            return res
+            .status(200)
+            .json(recipeinfo);
+          });
+        });
+      } else {
+        apiCall(req.headers.number, req.headers.query).then((recipeinfo) => {
           return res
           .status(200)
           .json(recipeinfo);
         });
-      });
+      }
     }
   })(req, res, next);
 });
