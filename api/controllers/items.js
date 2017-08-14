@@ -26,5 +26,4 @@ export const itemsPatch = (req, res) => {
 
 export const populateDb = (req, res, next) => {
   populate();
-  
 };

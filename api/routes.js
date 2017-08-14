@@ -63,6 +63,9 @@ router.get('/upcLookUp', (req, res, next) => {
 
 router.route('/test').get((req, res, next) => test(req, res, next));
 
+// apiCall(req.headers.number, createQuery(result)).then((recipeinfo) => {
+
+
 router.get('/recipes', (req, res, next) => {
   passport.authenticate('jwt', (err, user, info) => {
     if (err) {
@@ -86,7 +89,7 @@ router.get('/recipes', (req, res, next) => {
           .status(200)
           .json(recipeinfo);
         });
-      }
+    }
     }
   })(req, res, next);
 });
