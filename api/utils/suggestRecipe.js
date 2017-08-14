@@ -6,8 +6,10 @@ import Promise from "bluebird";
 
 
 const router = Router();
-const app_id = "744f7b77";
-const app_key = "28d95b6af2869f1fdd36dcc5a7e6a24b";
+const app_id = "d3dd7705";
+// const app_id = "744f7b77";
+const app_key = "9e56473d6091ebe4f26acb90a00ca4fb";
+// const app_key = "28d95b6af2869f1fdd36dcc5a7e6a24b";
 // api call address
 // https://api.edamam.com/search?q=1+chicken%22AND%221+tomato&app_id=744f7b77&app_key=28d95b6af2869f1fdd36dcc5a7e6a24b
 
